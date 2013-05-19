@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger
  * 
  * Logging is just here to satisfy the compiler. 
  */
-object TodoData extends Logging with CommandHandler {
+object TodoData extends Logging {
 
   /** A counter variable to fake out auto-incrementing keys for us **/
   val idCounter = new AtomicInteger(3)
@@ -37,15 +37,11 @@ object TodoData extends Logging with CommandHandler {
 
   /** Handles execution of Command requests.
    *
-   * Checks what kind of command is coming in the door and handles whatever
-   * work the Command should do when executed.
+   * Handles whatever work the Command should do when executed.
    * 
-   * By the time you get into the cases, you can start handling the work
-   * you want the command to do. When it gets to that point, it's already 
-   * successfully validated.
+   * The command is already successfully validated.
    */
-  protected def handle: Handler  = {
-    case c: CreateTodoCommand => 
+   def handle(c: CreateTodoCommand): ModelValidation[Todo]  = {
       add(newTodo(~c.name.value))
   }
   

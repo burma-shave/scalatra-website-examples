@@ -30,7 +30,7 @@ class TodosStringValidations(b: FieldDescriptor[String]) {
 /** Set up an abstract class to inherit from, so we don't need to keep on
  *  repeating the `extends ModelCommand[T]` in every command we make.
  */
-abstract class TodosCommand[S](implicit mf: Manifest[S]) extends ModelCommand[S] with JsonCommand {
+abstract class TodosCommand[S](implicit mf: Manifest[S]) extends JsonCommand {
   
   /**
    * Pimp the [org.scalatra.commands.FieldDescriptor] class with our [TodosStringValidations]
